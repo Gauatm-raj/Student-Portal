@@ -186,7 +186,7 @@ let table_container = document.getElementById('studentTable');
         })
     
         let nameCell=document.createElement('div');
-        nameCell.innerHTML=`<img src="${Img}" alt="${name}"> <span> ${name}</span> `
+        nameCell.innerText=`<img src="${Img}" alt="${name}"> <span> ${name}</span> `
         
         let arr=[Id,nameCell.innerText,Gender,Classes,Marks,Passing,Email]
     
@@ -195,7 +195,13 @@ let table_container = document.getElementById('studentTable');
     
         for(let i=0;i<7;i++){
             let tdata=document.createElement('td');
-            tdata.innerText=arr[i];
+            if(i==1){
+                tdata.innerHTML=arr[i]
+            
+            }else{
+
+                tdata.innerText=arr[i];
+            }
             tableRow.append(tdata)
         }
         tbody.append(tableRow)
@@ -211,7 +217,7 @@ let table_container = document.getElementById('studentTable');
     table_container.append(tableWrapper);
 function atoz(){
     let arr=[...studentData];
-    tableWrapper.innerHTML="";
+    tbody.innerHTML="";
     arr.sort((a,b)=>{
         if (a.first_name< b.first_name) return -1;
         if (a.first_name > b.first_name) return 1;
@@ -221,7 +227,7 @@ function atoz(){
 }
 
 function ztoa(){
-    tableWrapper.innerHTML="";
+    tbody.innerHTML="";
     let arr=[...studentData];
     arr.sort((a,b)=>{
         if (a.first_name< b.first_name) return 1;
@@ -233,7 +239,7 @@ function ztoa(){
 
 function marks(){
     let arr=[...studentData];
-    tableWrapper.innerHTML="";
+    tbody.innerHTML="";
     arr.sort((a,b)=>{
         if (a.marks< b.marks) return 1;
         
@@ -244,7 +250,7 @@ function marks(){
 
 function passed(){
     let arr=[...studentData];
-    tableWrapper.innerHTML="";
+    tbody.innerHTML="";
     arr.sort((a,b)=>{
         if (a.passing===true || b.passing===false ) return -1;
         
@@ -254,7 +260,7 @@ function passed(){
 }
 
 function c(){
-    tableWrapper.innerHTML="";
+    tbody.innerHTML="";
     let arr=[...studentData];
     arr.sort((a,b)=>{
         if (a.class< b.class) return -1;
@@ -265,7 +271,7 @@ function c(){
 }
 
 function g(){
-    tableWrapper.innerHTML="";
+    tbody.innerHTML="";
     let arr=[...studentData];
     arr.sort((a,b)=>{
         if (a.gender< b.gender) return -1;
@@ -362,16 +368,22 @@ function display(arr){
         let nameCell=document.createElement('div');
         nameCell.innerHTML=`<img src="${Img}" alt="${name}"> <span> ${name}</span> `
         
-        
-        // console.log(Id,Img,name,Gender,Classes,Marks,Passing,Email);
-        let currArray=[Id,nameCell.innerText,Gender,Classes,Marks,Passing,Email]
+        let arr1=[Id,name,Gender,Classes,Marks,Passing,Email]
     
         
     
     
         for(let i=0;i<7;i++){
             let tdata=document.createElement('td');
-            tdata.innerText=currArray[i];
+            if(i==1){
+                tdata.innerHTML=arr1[i]
+            
+            }else{
+
+                tdata.innerText=arr1[i];
+            }
+           
+            
             tableRow.append(tdata)
         }
         tbody.append(tableRow)
