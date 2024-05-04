@@ -100,11 +100,117 @@ let studentData=[{"id":1,"first_name":"Chadwick","last_name":"Ayre","email":"cay
 {"id":100,"first_name":"Zoe","last_name":"Moorhead","email":"zmoorhead2r@sfgate.com","gender":"Female","img_src":"https://robohash.org/fugiatcorporisdeleniti.png?size=50x50&set=set1","class":8,"marks":43,"passing":true,"city":"Makin Village"}]
 
 
-function refreshPage() {
-    window.location.reload();
-}
-function atoz(){
+
+
+let table_container = document.getElementById('studentTable');
+
+
+    let tableWrapper = document.createElement('table');
     
+    
+    
+    // lets create th: 
+    let thead = document.createElement('thead');
+    tableWrapper.append(thead);
+    // lets create tr:
+    let tr = document.createElement('tr');
+    thead.append(tr);
+    
+    let headingOfTable = ["id", "name", "Gender", "Class", "Marks", "Passing","Email"];
+    
+    headingOfTable.forEach((heading)=>{
+       let theading = document.createElement('th');
+        theading.innerText = heading;
+        tr.append(theading);
+    })
+    
+    
+    
+    
+    // lets create tbody: 
+    let tbody = document.createElement('tbody');
+    
+    
+    
+    
+    for(let row in studentData){
+        let tableRow = document.createElement('tr');
+    
+        let obj=studentData[row];
+        let x= Object.keys(obj);//id firstname secondname
+        //console.log(x)
+        let name="";
+        let Id;
+        let Gender;
+        let Classes;
+        let Email="";
+        let Marks;
+        let Passing;
+        let Img;
+    
+        x.forEach((ele)=>{
+            if(ele=="id"){
+                Id=obj[ele]
+            }
+            if(ele== "first_name"){
+                name +=obj[ele]
+            }
+            
+            if(ele=="last_name"){
+                name+=" ";
+                name+=obj[ele];
+            }
+    
+            if(ele=="email"){
+                Email=obj[ele]
+            }
+            if(ele=="gender"){
+                Gender=obj[ele]
+            }
+            if(ele=="img_src"){
+                Img=obj[ele]
+            }
+            if(ele=="class"){
+                Classes=obj[ele]
+            }
+            if(ele=="passing"){
+                if(obj[ele]===true){
+                    Passing="Passed"
+                }else{
+                    Passing="Failed"
+                }
+            }
+            if(ele=="marks"){
+                Marks=obj[ele];
+            }
+        })
+    
+        let nameCell=document.createElement('div');
+        nameCell.innerHTML=`<img src="${Img}" alt="${name}"> <span> ${name}</span> `
+        
+        let arr=[Id,nameCell.innerText,Gender,Classes,Marks,Passing,Email]
+    
+        
+    
+    
+        for(let i=0;i<7;i++){
+            let tdata=document.createElement('td');
+            tdata.innerText=arr[i];
+            tableRow.append(tdata)
+        }
+        tbody.append(tableRow)
+
+       
+    }
+    
+    tableWrapper.append(tbody)
+    
+    
+    
+    
+    table_container.append(tableWrapper);
+function atoz(){
+    tableWrapper.innerHTML="";
     studentData.sort((a,b)=>{
         if (a.first_name< b.first_name) return -1;
         if (a.first_name > b.first_name) return 1;
@@ -114,7 +220,7 @@ function atoz(){
 }
 
 function ztoa(){
-   
+    tableWrapper.innerHTML="";
     studentData.sort((a,b)=>{
         if (a.first_name< b.first_name) return 1;
         if (a.first_name > b.first_name) return -1;
@@ -124,7 +230,7 @@ function ztoa(){
 }
 
 function marks(){
-    
+    tableWrapper.innerHTML="";
     studentData.sort((a,b)=>{
         if (a.marks< b.marks) return 1;
         
@@ -134,6 +240,7 @@ function marks(){
 }
 
 function passed(){
+    tableWrapper.innerHTML="";
     studentData.sort((a,b)=>{
         if (a.passing===true || b.passing===false ) return -1;
         
@@ -143,6 +250,7 @@ function passed(){
 }
 
 function c(){
+    tableWrapper.innerHTML="";
     studentData.sort((a,b)=>{
         if (a.class< b.class) return -1;
         
@@ -152,6 +260,7 @@ function c(){
 }
 
 function g(){
+    tableWrapper.innerHTML="";
     studentData.sort((a,b)=>{
         if (a.gender< b.gender) return -1;
         if (a.gender > b.gender) return 1;
@@ -248,7 +357,7 @@ function display(studentData){
         nameCell.innerHTML=`<img src="${Img}" alt="${name}"> <span> ${name}</span> `
         
         
-        console.log(Id,Img,name,Gender,Classes,Marks,Passing,Email);
+        // console.log(Id,Img,name,Gender,Classes,Marks,Passing,Email);
         let arr=[Id,nameCell.innerText,Gender,Classes,Marks,Passing,Email]
     
         
@@ -263,7 +372,7 @@ function display(studentData){
 
        
     }
-    console.log(tbody.innerHTML)
+    
     tableWrapper.append(tbody)
     
     
@@ -272,116 +381,8 @@ function display(studentData){
     table_container.append(tableWrapper);
 }
 // console.log(studentData)
-function main(){
-    let table_container = document.getElementById('studentTable');
 
+    
 
-    let tableWrapper = document.createElement('table');
-    
-    
-    
-    // lets create th: 
-    let thead = document.createElement('thead');
-    tableWrapper.append(thead);
-    // lets create tr:
-    let tr = document.createElement('tr');
-    thead.append(tr);
-    
-    let headingOfTable = ["id", "name", "Gender", "Class", "Marks", "Passing","Email"];
-    
-    headingOfTable.forEach((heading)=>{
-       let theading = document.createElement('th');
-        theading.innerText = heading;
-        tr.append(theading);
-    })
-    
-    
-    
-    
-    // lets create tbody: 
-    let tbody = document.createElement('tbody');
-    
-    
-    
-    
-    for(let row in studentData){
-        let tableRow = document.createElement('tr');
-    
-        let obj=studentData[row];
-        let x= Object.keys(obj);//id firstname secondname
-        //console.log(x)
-        let name="";
-        let Id;
-        let Gender;
-        let Classes;
-        let Email="";
-        let Marks;
-        let Passing;
-        let Img;
-    
-        x.forEach((ele)=>{
-            if(ele=="id"){
-                Id=obj[ele]
-            }
-            if(ele== "first_name"){
-                name +=obj[ele]
-            }
-            
-            if(ele=="last_name"){
-                name+=" ";
-                name+=obj[ele];
-            }
-    
-            if(ele=="email"){
-                Email=obj[ele]
-            }
-            if(ele=="gender"){
-                Gender=obj[ele]
-            }
-            if(ele=="img_src"){
-                Img=obj[ele]
-            }
-            if(ele=="class"){
-                Classes=obj[ele]
-            }
-            if(ele=="passing"){
-                if(obj[ele]===true){
-                    Passing="Passed"
-                }else{
-                    Passing="Failed"
-                }
-            }
-            if(ele=="marks"){
-                Marks=obj[ele];
-            }
-        })
-    
-        let nameCell=document.createElement('div');
-        nameCell.innerHTML=`<img src="${Img}" alt="${name}"> <span> ${name}</span> `
-        
-        
-        console.log(Id,Img,name,Gender,Classes,Marks,Passing,Email);
-        let arr=[Id,nameCell.innerText,Gender,Classes,Marks,Passing,Email]
-    
-        
-    
-    
-        for(let i=0;i<7;i++){
-            let tdata=document.createElement('td');
-            tdata.innerText=arr[i];
-            tableRow.append(tdata)
-        }
-        tbody.append(tableRow)
-
-       
-    }
-    console.log(tbody.innerHTML)
-    tableWrapper.append(tbody)
-    
-    
-    
-    
-    table_container.append(tableWrapper);
-}
 
 
