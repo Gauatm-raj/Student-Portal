@@ -366,9 +366,9 @@ function display(arr){
         })
     
         let nameCell=document.createElement('div');
-        nameCell.innerHTML=`<img src="${Img}" alt="${name}"> <span> ${name}</span> `
+        nameCell.innerText=`<img src="${Img}" alt="${name}"> <span> ${name}</span> `
         
-        let arr1=[Id,name,Gender,Classes,Marks,Passing,Email]
+        let arr1=[Id,nameCell.innerText,Gender,Classes,Marks,Passing,Email]
     
         
     
