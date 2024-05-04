@@ -210,101 +210,107 @@ let table_container = document.getElementById('studentTable');
     
     table_container.append(tableWrapper);
 function atoz(){
+    let arr=[...studentData];
     tableWrapper.innerHTML="";
-    studentData.sort((a,b)=>{
+    arr.sort((a,b)=>{
         if (a.first_name< b.first_name) return -1;
         if (a.first_name > b.first_name) return 1;
     return 0;
     })
-    display(studentData)
+    display(arr)
 }
 
 function ztoa(){
     tableWrapper.innerHTML="";
-    studentData.sort((a,b)=>{
+    let arr=[...studentData];
+    arr.sort((a,b)=>{
         if (a.first_name< b.first_name) return 1;
         if (a.first_name > b.first_name) return -1;
     return 0;
     })
-    display(studentData)
+    display(arr)
 }
 
 function marks(){
+    let arr=[...studentData];
     tableWrapper.innerHTML="";
-    studentData.sort((a,b)=>{
+    arr.sort((a,b)=>{
         if (a.marks< b.marks) return 1;
         
     return -1;
     })
-    display(studentData)
+    display(arr)
 }
 
 function passed(){
+    let arr=[...studentData];
     tableWrapper.innerHTML="";
-    studentData.sort((a,b)=>{
+    arr.sort((a,b)=>{
         if (a.passing===true || b.passing===false ) return -1;
         
     return 1;
     })
-    display(studentData)
+    display(arr)
 }
 
 function c(){
     tableWrapper.innerHTML="";
-    studentData.sort((a,b)=>{
+    let arr=[...studentData];
+    arr.sort((a,b)=>{
         if (a.class< b.class) return -1;
         
     return 1;
     })
-    display(studentData)
+    display(arr)
 }
 
 function g(){
     tableWrapper.innerHTML="";
-    studentData.sort((a,b)=>{
+    let arr=[...studentData];
+    arr.sort((a,b)=>{
         if (a.gender< b.gender) return -1;
         if (a.gender > b.gender) return 1;
        return 0;
     })
-    display(studentData)
+    display(arr)
 }
 
-function display(studentData){
-    let table_container = document.getElementById('studentTable');
+function display(arr){
+    // let table_container = document.getElementById('studentTable');
 
 
-    let tableWrapper = document.createElement('table');
+    // let tableWrapper = document.createElement('table');
     
     
     
-    // lets create th: 
-    let thead = document.createElement('thead');
-    tableWrapper.append(thead);
-    // lets create tr:
-    let tr = document.createElement('tr');
-    thead.append(tr);
+    // // lets create th: 
+    // let thead = document.createElement('thead');
+    // tableWrapper.append(thead);
+    // // lets create tr:
+    // let tr = document.createElement('tr');
+    // thead.append(tr);
     
-    let headingOfTable = ["id", "name", "Gender", "Class", "Marks", "Passing","Email"];
+    // let headingOfTable = ["id", "name", "Gender", "Class", "Marks", "Passing","Email"];
     
-    headingOfTable.forEach((heading)=>{
-       let theading = document.createElement('th');
-        theading.innerText = heading;
-        tr.append(theading);
-    })
-    
-    
-    
-    
-    // lets create tbody: 
-    let tbody = document.createElement('tbody');
+    // headingOfTable.forEach((heading)=>{
+    //    let theading = document.createElement('th');
+    //     theading.innerText = heading;
+    //     tr.append(theading);
+    // })
     
     
     
     
-    for(let row in studentData){
+    // // lets create tbody: 
+    // let tbody = document.createElement('tbody');
+    
+    tbody.innerHTML=""
+    
+    
+    for(let row in arr){
         let tableRow = document.createElement('tr');
     
-        let obj=studentData[row];
+        let obj=arr[row];
         let x= Object.keys(obj);//id firstname secondname
         //console.log(x)
         let name="";
@@ -358,14 +364,14 @@ function display(studentData){
         
         
         // console.log(Id,Img,name,Gender,Classes,Marks,Passing,Email);
-        let arr=[Id,nameCell.innerText,Gender,Classes,Marks,Passing,Email]
+        let currArray=[Id,nameCell.innerText,Gender,Classes,Marks,Passing,Email]
     
         
     
     
         for(let i=0;i<7;i++){
             let tdata=document.createElement('td');
-            tdata.innerText=arr[i];
+            tdata.innerText=currArray[i];
             tableRow.append(tdata)
         }
         tbody.append(tableRow)
@@ -382,7 +388,24 @@ function display(studentData){
 }
 // console.log(studentData)
 
+function filterStudents(query) {
     
+    return studentData.filter(student =>
+        student.first_name.toLowerCase().includes(query.toLowerCase()) ||
+        student.last_name.toLowerCase().includes(query.toLowerCase()) ||
+        student.email.toLowerCase().includes(query.toLowerCase())
+    );
+}
+
+// Function to handle search functionality
+function handleSearch() {
+    let searchInput = document.getElementById('serachInput').value;
+    console.log(searchInput);
+
+    let filteredStudents = filterStudents(searchInput);
+    console.log(filteredStudents)
+    display(filteredStudents);
+}   
 
 
 
